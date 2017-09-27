@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Ninja Gold</title>
+        <style>
+            #wrapper{
+                display: flex;
+            }
+            .place{
+                border:1px solid black;
+                width: 10em;
+                height: 10em;
+                text-align: center;
+                margin: auto;
+            }
+            #activities{
+                border:1px solid black;
+                width: 75em;
+                height: 10em;
+                margin: auto;
+                overflow: scroll;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Your Gold: {{request.session.gold}}</p>
+        <div id='wrapper'>
+            <div id='farm' class='place'>
+                <h3>Farm</h3>
+                <p>(earns 10-20 gold)</p>
+                <form action='ninja_gold/process_money/farm'>
+                    <input type='submit' value='Find Gold!'>
+                </form>
+            </div>
+
+            <div id='cave' class='place'>
+                <h3>Cave</h3>
+                <p>(earns 5-10 gold)</p>
+                <form action='ninja_gold/process_money/cave'>
+                    <input type='submit' value='Find Gold!'>
+                </form>
+            </div>
+
+            <div id='house' class='place'>
+                <h3>House</h3>
+                <p>(earns 2-5 gold)</p>
+                <form action='ninja_gold/process_money/house'>
+                    <input type='submit' value='Find Gold!'>
+                </form>
+            </div>
+
+            <div id='casino' class='place'>
+                <h3>Casino</h3>
+                <p>(earns/takes 0-50 gold)</p>
+                <form action='ninja_gold/process_money/casino'>
+                    <input type='submit' value='Find Gold!'>
+                </form>
+            </div>
+        </div>
+        <p>Activities:</p></br>
+        <div id='activities'>
+            {% for activity in request.session.log %}
+                <p>{{activity}}</p>
+            {% endfor %}
+        </div>
+        <form action='ninja_gold/clear'>
+            <input type='submit' value='Reset'>
+        </form>
+        <script language="javascript">
+            var objDiv = document.getElementById("activities");
+            objDiv.scrollTop = objDiv.scrollHeight;
+        </script>
+    </body>
+</html>
